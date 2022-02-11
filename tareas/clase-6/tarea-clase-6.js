@@ -6,12 +6,13 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente la mayor edad
 Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuevamente, borrando los inputs ya creados (investigar cómo en MDN).
 */
 
-$siguientePaso = document.querySelector("#siguiente-paso");
+const $siguientePaso = document.querySelector("#siguiente-paso");
 $siguientePaso.onclick = function(){
     const cantidadIntegrantes = document.querySelector("#cantidad-integrantes").value;
     const integrantes = document.querySelector("#integrantes");
-    mostrarBotonCalcular();
-    mostrarBotonResetear();
+    
+    mostrarInformacion("#calcular");
+    mostrarInformacion("#resetear")
     
     
     for(let i=0; i < cantidadIntegrantes; i++){
@@ -20,21 +21,14 @@ $siguientePaso.onclick = function(){
 
 }
 
-function mostrarBotonCalcular(){
-    document.querySelector("#calcular").className= "";
+function mostrarInformacion(elemento){
+    document.querySelector(elemento).className="";
 }
 
-function mostrarBotonResetear(){
-    document.querySelector("#resetear").className= "";
+function ocultarInformacion(elemento){
+    document.querySelector(elemento).className="oculto";
 }
 
-function ocultarAnalisis(){
-    document.querySelector("#analisis").className = "oculto";
-}
-
-function ocultarBotonCalcular(){
-    document.querySelector("#calcular").className= "oculto";
-}
 
 function ocultarIntegrantes(){
     const cantidad= document.querySelectorAll(".integrante")
@@ -44,11 +38,12 @@ function ocultarIntegrantes(){
 }
 
 
-$resetear = document.querySelector("#resetear");
+const $resetear = document.querySelector("#resetear");
 $resetear.onclick = function(){
-    ocultarAnalisis();
-    ocultarBotonCalcular();
+    
     ocultarIntegrantes();
+    ocultarInformacion("#analisis");
+    cultarInformacion("#calcular");
 }
 
 
@@ -71,21 +66,16 @@ function crearIntegrantes(indice){
 
 const $calcular = document.querySelector("#calcular");
 $calcular.onclick = function(){
-    mostrarAnalisis();
-    document.querySelector("#edad-mayor").textContent = calcularMayorEdad();
-    document.querySelector("#edad-menor").textContent = calcularMenorEdad();
-    document.querySelector("#edad-promedio").textContent = calcularPromedio();
-}
-
-
-function mostrarAnalisis(){
-    document.querySelector("#analisis").className = "";
+    mostrarInformacion("#analisis");
+    document.querySelector("#edad-mayor").textContent = calcularMayorEdad(document.querySelectorAll(".edad-integrante"));
+    document.querySelector("#edad-menor").textContent = calcularMenorEdad(document.querySelectorAll(".edad-integrante"));
+    document.querySelector("#edad-promedio").textContent = calcularPromedio(document.querySelectorAll(".edad-integrante"));
 }
 
 
 
-function calcularMayorEdad(){
-    const edades = document.querySelectorAll(".edad-integrante");
+function calcularMayorEdad(elemento){
+    const edades = elemento;
     let edadMayor = 0;
     for(let i=0;i < edades.length;i++){
         if(i === 0){
@@ -98,8 +88,8 @@ function calcularMayorEdad(){
     return edadMayor;
 }
 
-function calcularMenorEdad(){
-    const edades = document.querySelectorAll(".edad-integrante");
+function calcularMenorEdad(elemento){
+    const edades = elemento;
     let edadMenor = 0;
     for(let i=0;i < edades.length;i++){
         if(i === 0){
@@ -112,8 +102,8 @@ function calcularMenorEdad(){
     return edadMenor;
 }
 
-function calcularPromedio(){
-    const edades = document.querySelectorAll(".edad-integrante");
+function calcularPromedio(elemento){
+    const edades = elemento;
     let sumaPromedio = 0;
     let cantidad = edades.length;
     for(let i=0; i < cantidad; i++){
