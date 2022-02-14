@@ -43,7 +43,7 @@ $resetear.onclick = function(){
     
     ocultarIntegrantes();
     ocultarInformacion("#analisis");
-    cultarInformacion("#calcular");
+    ocultarInformacion("#calcular");
 }
 
 
@@ -70,6 +70,7 @@ $calcular.onclick = function(){
     document.querySelector("#edad-mayor").textContent = calcularMayorEdad(document.querySelectorAll(".edad-integrante"));
     document.querySelector("#edad-menor").textContent = calcularMenorEdad(document.querySelectorAll(".edad-integrante"));
     document.querySelector("#edad-promedio").textContent = calcularPromedio(document.querySelectorAll(".edad-integrante"));
+    mostrarInformacion("#espacios-calculo");
 }
 
 
@@ -119,3 +120,37 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor sala
 
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
+function agregarEspacio(){
+    const $div = document.createElement('div');
+    $div.className = 'espacio-calculo';
+  
+    const $label = document.createElement('label');
+    $label.textContent = "Salario anual" ;
+  
+    const $input = document.createElement('input');
+    $input.type = 'number';
+  
+    $div.appendChild($label);
+    $div.appendChild($input);
+  
+   const $espacios = document.querySelector("#espacios-calculo");
+   $espacios.appendChild($div);
+  }
+
+const $agregar_salario = document.querySelector("#agregar-salario");
+$agregar_salario.onclick= function(){
+    agregarEspacio();
+}
+
+const $quitar_salario = document.querySelector("#quitar-salario");
+$quitar_salario.onclick = function(){
+    quitarEspacio()
+}
+
+function quitarEspacio(){
+    const $div = document.querySelector(".espacio-calculo");
+    
+    const $espacios = document.querySelector("#espacios-calculo");
+    $espacios.removeChild($div);
+}
+
