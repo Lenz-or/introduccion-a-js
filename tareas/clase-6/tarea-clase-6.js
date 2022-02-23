@@ -8,18 +8,25 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
 
 const $siguientePaso = document.querySelector("#siguiente-paso");
 $siguientePaso.onclick = function(){
-    const cantidadIntegrantes = document.querySelector("#cantidad-integrantes").value;
+    const cantidadIntegrantes = Number(document.querySelector("#cantidad-integrantes").value);
     const integrantes = document.querySelector("#integrantes");
     
-    mostrarInformacion("#calcular");
-    mostrarInformacion("#resetear")
-    
+    ocultarIntegrantes();
+    if(!(cantidadIntegrantes === 0 || cantidadIntegrantes === "")) {
+        mostrarInformacion("#calcular");
+         mostrarInformacion("#resetear");
+    }
     
     for(let i=0; i < cantidadIntegrantes; i++){
-        crearIntegrantes(i);
+        if(!((cantidadIntegrantes === 0) || "") ){
+            crearIntegrantes(i);
+        }
+        
     }
 
 }
+
+
 
 function mostrarInformacion(elemento){
     document.querySelector(elemento).className="";
@@ -161,7 +168,7 @@ function agregarEspacio(){
 
 
 function quitarEspacio(){
-    const $div = document.querySelector(".espacio-calculo");
+    const $div = document.querySelector(".espacio-cal");
     
     const $espacios = document.querySelector("#espacios-calculo");
     $espacios.removeChild($div);
