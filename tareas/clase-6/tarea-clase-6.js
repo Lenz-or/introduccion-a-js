@@ -38,9 +38,14 @@ function ocultarInformacion(elemento){
 
 
 function ocultarIntegrantes(){
-    const cantidad= document.querySelectorAll(".integrante")
+    
+    
+    const cantidad= document.querySelectorAll(".integrante");  
+    //const integrante = document.querySelector(".integrante");
     for(let i=0; i < cantidad.length; i++){
-        document.querySelector(".integrante").className= "oculto";
+    document.querySelector(".integrante").className= "oculto";
+    document.querySelector(".edad-integrante").className = "oculto";
+    //integrantes.removeChild(integrante);
     }
 }
 
